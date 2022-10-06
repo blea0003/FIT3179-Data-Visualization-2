@@ -1,11 +1,15 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "autosize": "fit-x",
+    "width": "container",
+    "height": 450,
     "data": {
-        "url": "https://raw.githubusercontent.com/blea0003/FIT3179-Data-Visualization-2/main/data/SEX_AGE_ERP_2001-2020.csv"
+        "url": "../data/SEX_AGE_ERP_2001-2020.csv",
+        "format": {
+            "parse": null
+        }
     },
     "transform": [
-        {"filter": "datum.Age != 'Oct-14'"},
-        {"filter": "datum.Age != '05-Sep'"},
         {"filter": "datum.Age != 'All ages'"},
         {"filter": "datum.Year == Year_Selection"}
     ],
@@ -22,30 +26,90 @@
             }
         }
     ],
-
-    "width": "container",
-    "mark": {
-        "type": "bar"
-    },
-    "encoding": {
-        "x": {
-            "aggregate": "average", "field": "Population"
-        },
-        "y": {
-            "field": "Age",
-            "sort": "descending",
-            "axis": {
-                "title": null
+    "layer": [
+        {
+            "mark": {
+                "type": "bar",
+                "size": 20
+            },
+            "encoding": {
+                "x": {
+                    "aggregate": "average", "field": "Population"
+                },
+                "y": {
+                    "field": "Age",
+                    "type": "quantitative",               
+                    "axis": {
+                        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85]
+                    }
+                },
+                "color": {
+                    "field": "Sex",
+                    "type": "nominal",
+                    "scale": {
+                        "scheme": "darkred"
+                    }
+                },
+                "tooltip": [
+                    {"field": "Year"},
+                    {"field": "Sex"},
+                    {"field": "Population"}
+                ]
             }
         },
-        "color": {
-            "field": "Sex"
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/blea0003/FIT3179-Data-Visualization-2/main/data/SEX_AGE_Q_2001-2020.csv"
+            },
+            "transform": [
+                {
+                    "filter": "datum.Year == Year_Selection"
+                }
+            ],
+            "layer": [
+                {
+                    "mark": {
+                        "type": "rule"
+                    },
+                    "encoding": {
+                        "y": {
+                            "field": "Q1",
+                            "type": "quantitative"
+                        },
+                        "color": {
+                            "value": "blue"
+                        }
+                    }
+                },
+                
+                {
+                    "mark": {
+                        "type": "rule"
+                    },
+                    "encoding": {
+                        "y": {
+                            "field": "Q3",
+                            "type": "quantitative"
+                        },
+                        "color": {
+                            "value": "blue"
+                        }
+                    }
+                }
+            ]
+            
+
         }
-    },
-        
+    ],
     "config": {
         "legend": {
             "disable": true
+        },
+        "axis": {
+            "grid": false
+        },
+        "view": {
+            "stroke": null
         }
     }
 }
