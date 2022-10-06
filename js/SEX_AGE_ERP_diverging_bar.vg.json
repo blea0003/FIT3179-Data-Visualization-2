@@ -1,0 +1,51 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/blea0003/FIT3179-Data-Visualization-2/main/data/SEX_AGE_ERP_2001-2020.csv"
+    },
+    "transform": [
+        {"filter": "datum.Age != 'Oct-14'"},
+        {"filter": "datum.Age != '05-Sep'"},
+        {"filter": "datum.Age != 'All ages'"},
+        {"filter": "datum.Year == Year_Selection"}
+    ],
+    "params": [
+        {
+            "name": "Year_Selection",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2001,
+                "max": 2020,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+
+    "width": "container",
+    "mark": {
+        "type": "bar"
+    },
+    "encoding": {
+        "x": {
+            "aggregate": "average", "field": "Population"
+        },
+        "y": {
+            "field": "Age",
+            "sort": "descending",
+            "axis": {
+                "title": null
+            }
+        },
+        "color": {
+            "field": "Sex"
+        }
+    },
+        
+    "config": {
+        "legend": {
+            "disable": true
+        }
+    }
+}
