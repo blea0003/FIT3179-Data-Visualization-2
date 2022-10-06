@@ -53,6 +53,27 @@
     </div>
     <!-- end Geographical Population Distribution grid group -->
 
+    <!-- Age-Gender Population Distribution grid group -->
+    <div class="pure-g">
+
+      <div class="pure-u-1-2">
+        <h2>Gender & Age Distribution of Australian Population</h2>
+        <p>
+          Average Population per Square Kilometer by Local Government Area (LGA) [2001-2020]
+        </p>
+        <div id="SEX_AGE_ERP_diverging_bar" class="vis-container"></div>
+
+      </div>
+
+      <div class="pure-u-1-2">
+        <p>
+          Average Population per Square Kilometer by Local Government Area (LGA) [2001-2020]
+        </p>
+        
+      </div>
+    </div>
+    <!-- end Geographical Population Distribution grid group -->
+
     <!-- Population Growth grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1">
@@ -70,10 +91,14 @@
   <script type="text/javascript">
 
     var vis1 = "js/LGA_PD_choropleth.vg.json";
+    var vis2 = "js/SEX_AGE_ERP_diverging_bar.vg.json";
     var vis3 = "js/STE_ERP_area_line.vg.json"
-    var vis4 = "js/STE_ERP_area.vg.json";
 
     vegaEmbed('#LGA_PD_choropleth', vis1).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#SEX_AGE_ERP_diverging_bar', vis2).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
@@ -81,9 +106,7 @@
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#STE_ERP_area', vis4).then(function(result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
+    
   </script>
 
 </body>
