@@ -32,7 +32,9 @@
                         "y": {
                             "aggregate": "sum", 
                             "field": "Change_Amount_Over_Previous_Year",
-                            "title": "Persons"
+                            "axis": {
+                                "format": "~s"
+                            }
                         },
                         "color": {
                             "field": "Region",
@@ -128,7 +130,9 @@
                         "y": {
                             "field": "Change_Percent_Over_Previous_Year",
                             "type": "quantitative",
-                            "title": "Percent (%)"
+                            "axis": {
+                                "format": "~%"
+                            }
                         },
                         "color": {
                             "field": "Region",
@@ -215,11 +219,15 @@
             "anchor":"start",
             "fontWeight": "lighter",
             "fontSize": 13,
-            "color": "grey"
+            "color": "black"
         },
 
         "axis": {
-            "grid": false
+            "grid": false,
+            "domain": false,
+            "ticks": false,
+            "title": null,
+            "labelColor": "grey"
         },
         "axisY": {
             "title": null

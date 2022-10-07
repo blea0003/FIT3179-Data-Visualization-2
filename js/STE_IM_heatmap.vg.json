@@ -1,0 +1,147 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 400,
+    "height": 400,
+    "title": "State of Depature",
+    "data": {
+        "url": "https://raw.githubusercontent.com/blea0003/FIT3179-Data-Visualization-2/main/data/STE_IM_2000-2020.csv"
+    },
+    "transform": [
+        {
+            "filter": "slice(datum.Date, 0, 4) == Year_Selection"
+        }
+    ],
+    "params": [
+        {
+            "name": "Year_Selection",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2001,
+                "max": 2020,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "encoding": {
+        "x": {
+            "field": "State_Arrival",
+            "type": "ordinal",
+            "sort": "descending"
+        },
+        "y": {
+            "field": "State_Depature",
+            "type": "ordinal"
+        }
+    },
+    "layer": [
+        {
+            "mark": {
+                "type": "rect"
+            },
+            "encoding": {
+                "color": {
+                    "field": "Population",
+                    "aggregate": "sum",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "yelloworangered",
+                        "type": "sqrt",
+                        "domain": [0,64000]
+                    },
+                    "legend": {
+                        "title": "People",
+                        "format": "~s"
+                    }
+                }
+            }
+        },
+        {
+            "transform": [
+                {
+                    "filter": "datum.Population > 0"
+                }
+            ],
+            "mark": {
+                "type": "text",
+                "align": "center"
+            },
+            "encoding": {
+                "text": {
+                    "field": "Population",
+                    "type": "quantitative",
+                    "aggregate": "sum",
+                    "format": "~s"
+                },
+
+                "opacity": {
+                    "condition": {
+                        "param": "Hover_Selection", 
+                        "value":1
+                    },
+                    "value": 0.4
+                }
+            }
+        },
+        {
+            "encoding": {
+                "opacity": {
+                    "condition": {
+                        "value": 1,
+                        "param": "Hover_Selection",
+                        "empty": false
+                    },
+                    "value": 0
+                }
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "rect",
+                        "fill": null,
+                        "stroke": "black"
+                    },
+                    "params": [
+                        {
+                            "name": "Hover_Selection",
+                            "select": {
+                                "type": "point",
+                                "fields": ["State_Arrival", "State_Depature"],
+                                "nearest": true,
+                                "on": "mouseover",
+                                "clear": "mouseout"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "config": {
+        "title": {
+            "anchor":"start",
+            "fontWeight": "lighter",
+            "fontSize": 13,
+            "color": "black"
+        },
+        "axis": {
+            "grid": false,
+            "domain": false,
+            "ticks": false,
+            "labelColor": "grey",
+            "title": null,
+            "labelPadding": 10
+        },
+        "axisX": {
+            "labelAngle": 0,
+            "labelExpr": "split(datum.label, ' ')"
+        },
+        "view": {
+            "stroke": null
+        },
+        "padding": {
+            "bottom": 25
+        }
+    } 
+}

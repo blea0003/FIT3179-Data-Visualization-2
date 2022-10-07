@@ -3,11 +3,9 @@
     "autosize": "fit-x",
     "width": "container",
     "height": 450,
+    "title": "Age Bracket (~5 Years)",
     "data": {
-        "url": "../data/SEX_AGE_ERP_2001-2020.csv",
-        "format": {
-            "parse": null
-        }
+        "url": "https://raw.githubusercontent.com/blea0003/FIT3179-Data-Visualization-2/main/data/SEX_AGE_ERP_2001-2020.csv"
     },
     "transform": [
         {"filter": "datum.Age != 'All ages'"},
@@ -34,26 +32,32 @@
             },
             "encoding": {
                 "x": {
-                    "aggregate": "average", "field": "Population"
+                    "aggregate": "average", "field": "Population",
+                    "axis": {
+                        "format": "(~%"
+                    }
                 },
                 "y": {
                     "field": "Age",
                     "type": "quantitative",               
                     "axis": {
-                        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85]
+                        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85],
+                        "tickCount": 20,
+                        "title": null
                     }
                 },
                 "color": {
                     "field": "Sex",
                     "type": "nominal",
                     "scale": {
-                        "scheme": "darkred"
+                        "domain": ["Females", "Males"],
+                        "range": ["#fea045", "#f23e26"]
                     }
                 },
                 "tooltip": [
                     {"field": "Year"},
                     {"field": "Sex"},
-                    {"field": "Population"}
+                    {"field": "Population", "format":"(~p"}
                 ]
             }
         },
@@ -67,10 +71,7 @@
                 }
             ],
             "layer": [
-                {
-                    "mark": {
-                        "type": "rule"
-                    },
+                {  
                     "encoding": {
                         "y": {
                             "field": "Q1",
@@ -79,13 +80,30 @@
                         "color": {
                             "value": "blue"
                         }
-                    }
-                },
-                
-                {
-                    "mark": {
-                        "type": "rule"
                     },
+                    "layer": [
+                        {
+                            "mark": {
+                                "type": "rule"
+                            }
+                        },
+                        {
+                            "mark": {
+                                "type": "text",
+                                "dx": 9
+                            },
+                            "encoding": {
+                                "text": {
+                                    "value": "Q1"
+                                },
+                                "x": {
+                                    "datum": 0.04
+                                }
+                            }
+                        }
+                    ]
+                },
+                {  
                     "encoding": {
                         "y": {
                             "field": "Q3",
@@ -94,22 +112,88 @@
                         "color": {
                             "value": "blue"
                         }
-                    }
+                    },
+                    "layer": [
+                        {
+                            "mark": {
+                                "type": "rule"
+                            }
+                        },
+                        {
+                            "mark": {
+                                "type": "text",
+                                "dx": 9
+                            },
+                            "encoding": {
+                                "text": {
+                                    "value": "Q3"
+                                },
+                                "x": {
+                                    "datum": 0.04
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
-            
-
+        },
+        {
+            "data": {
+                "values": [
+                    {"Sex": "Female Population", "x_text": -0.02, "y_text": -5, "colour": "#fea045"},
+                    {"Sex": "Male Population", "x_text": 0.02, "y_text": -5, "colour": "#f23e26"}
+                ]
+            },
+            "mark": {
+                "type": "text",
+                "color": {"expr": "datum.colour"},
+                "fontWeight": "bold",
+                "dy": 8
+            },
+            "encoding": {
+                "text": {
+                    "field": "Sex"
+                },
+                "x": {
+                    "field": "x_text",
+                    "type": "quantitative",
+                    "axis": {
+                        "title": null
+                    }
+                },
+                "y": {
+                    "field": "y_text",
+                    "type": "quantitative",               
+                    "axis": {
+                        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85],
+                        "title": null
+                    }
+                }
+            }
         }
     ],
     "config": {
+        "title": {
+            "anchor":"start",
+            "fontWeight": "lighter",
+            "fontSize": 13,
+            "color": "black"
+        },
         "legend": {
             "disable": true
         },
         "axis": {
-            "grid": false
+            "grid": false,
+            "domain": false,
+            "ticks": false,
+            "labelFontSize": 11,
+            "labelColor": "grey"
         },
         "view": {
             "stroke": null
+        },
+        "padding": {
+            "bottom": 25
         }
     }
 }

@@ -29,10 +29,10 @@
     <!-- Title grid group-->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>"Australian Population"</h1>
+        <h1>Australian Population Analysis (2001-2020)</h1>
         <p>
-          An analysis of the various aspects of Australia's population.<br>
-
+          An basic and general overview of Australia's Population.<br><br>
+          We'll first see some interesting aspects
 
         </p>
       </div>
@@ -45,19 +45,42 @@
       <div class="pure-u-1-1">
         <h2>Geographical Distribution of Australian Population</h2>
         <p>
-          Average Population per Square Kilometer by Local Government Area (LGA) [2001-2020]
+          Where do Australians live?
         </p>
         <div id="LGA_PD_choropleth" class="vis-container"></div>
 
       </div>
     </div>
     <!-- end Geographical Population Distribution grid group -->
+    
+    <!-- Interstate Migration grid group -->
+    <div class="pure-g">
+
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h2>Interstate Migration</h2>
+          <p>
+            Population Growth of States over Time [2000-2020] df;ajkl;fjfjf;fkjkfjd;fjfkjfafdfffffadsfasfasfasfsfasfafasfffdasfasfas
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div id="STE_IM_heatmap" class="vis-container"></div>
+      </div>
+
+    </div>
+    <!-- end Interstate Migration grid group -->   
 
     <!-- Age-Gender Population Distribution grid group -->
     <div class="pure-g">
 
       <div class="pure-u-1-2">
-        <div class="description description-left">
+        <div id="SEX_AGE_ERP_diverging_bar" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div class="description description-right">
           <h2>Gender & Age Distribution</h2>
           <p>
             Average Population per Square Kilometer by Local Government Area (LGA) [2001-2020]
@@ -65,15 +88,31 @@
         </div>
       </div>
 
-      <div class="pure-u-1-2">
-        <div id="SEX_AGE_ERP_diverging_bar" class="vis-container"></div>
+    </div>
+    <!-- end Age-Gender Population Distribution grid group -->
+
+    <!-- Birth Death grid group -->
+    <div class="pure-g">
+
+      <div class="pure-u-3-4">
+        <div class="description description-left">
+          <h2>Brith vs Death Rate</h2>
+          <p>
+            Population Growth of States over Time [2000-2020]
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-u-1-4">
+        <div id="STE_BD_bubble" class="vis-container"></div>
       </div>
 
     </div>
-    <!-- end Geographical Population Distribution grid group -->
+    <!-- end Birth Death grid group -->
 
     <!-- Population Growth grid group -->
     <div class="pure-g">
+
       <div class="pure-u-3-4">
         <div id="STE_ERP_area_line" class="vis-container"></div>
       </div>
@@ -86,6 +125,7 @@
           </p>
         </div>
       </div>
+
     </div>
     <!-- end Population Growth grid group -->
 
@@ -96,6 +136,7 @@
     var vis1 = "js/LGA_PD_choropleth.vg.json";
     var vis2 = "js/SEX_AGE_ERP_diverging_bar.vg.json";
     var vis3 = "js/STE_ERP_area_line.vg.json"
+    var vis4 = "js/STE_IM_heatmap.vg.json"
 
     vegaEmbed('#LGA_PD_choropleth', vis1).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
@@ -106,6 +147,9 @@
     }).catch(console.error);
 
     vegaEmbed('#STE_ERP_area_line', vis3).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    vegaEmbed('#STE_IM_heatmap', vis4).then(function(result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
