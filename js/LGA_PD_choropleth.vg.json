@@ -189,7 +189,7 @@
                                 "body": "Mainly concentrated on the East Coast"
                             },
                             {
-                                "lat1": -11, "lon1": 153, "lat2": -11, "lon2":153, 
+                                "lat1": -17, "lon1": 151, "lat2": -17, "lon2":151, 
                                 "alignment": "left", "x_dis": 0, "y_dis": 0, 
                                 "col": "grey", "line_col": null, "f_size": 13, "f_weight": "normal",
                                 "head": ["*Hover for more"],
@@ -263,6 +263,11 @@
             "fontWeight": "lighter",
             "fontSize": 13,
             "color": "black"
+        },
+        "legend": {
+            "orient": "top-right",
+            "gradientHorizontalMinLength": 200,
+            "titleOrient":"top"
         },
         "view": {
             "stroke": null
