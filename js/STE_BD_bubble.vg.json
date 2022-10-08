@@ -1,0 +1,283 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 400,
+    "title": "Death Rate (per 1000)",
+    "data": {
+        "url": "https://raw.githubusercontent.com/blea0003/FIT3179-Data-Visualization-2/main/data/STE_BD_2001-2020.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.Year == Year_Selection"
+        }
+    ],
+    "params": [
+        {
+            "name": "Annotation_Selection",
+            "value": 1,
+            "bind": {
+                "input": "select",
+                "options": [1, 0],
+                "labels": ["Yes", "No"],
+                "name": "Annotations: "
+            }
+        },
+        {
+            "name": "Year_Selection",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2001,
+                "max": 2020,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "layer": [
+        {
+            "encoding": {
+                "x": {
+                    "field": "Birth_Rate",
+                    "type": "quantitative",
+                    "aggregate": "average"
+                },
+                "color": {
+                    "value": "blue"
+                }
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "rule",
+                        "strokeDash": [4,2],
+                        "opacity": {"expr": "Annotation_Selection / 3"}
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "opacity": {"expr": "Annotation_Selection"},
+                        "dy": -13
+                    },
+                    "encoding": {
+                        "text": {
+                            "value": "Avg"
+                        },
+                        "y": {
+                            "value": 5
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "encoding": {
+                "y": {
+                    "field": "Death_Rate",
+                    "type": "quantitative",
+                    "aggregate": "average"
+                },
+                "color": {
+                    "value": "blue"
+                }
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "rule",
+                        "strokeDash": [4,2],
+                        "opacity": {"expr": "Annotation_Selection / 3"}
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "opacity": {"expr": "Annotation_Selection"},
+                        "dx": 13
+                    },
+                    "encoding": {
+                        "text": {
+                            "value": "Avg"
+                        },
+                        "x": {
+                            "value": 580
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "encoding": {
+                "x": {
+                    "title": "Birth Rate (per 1000)",
+                    "field": "Birth_Rate",
+                    "type": "quantitative",
+                    "scale": {
+                        "domainMin": 4,
+                        "domainMax": 19
+                    }
+                },
+                "y": {
+                    "field": "Death_Rate",
+                    "type": "quantitative",
+                    "scale": {
+                        "domainMin": 4,
+                        "domainMax": 9
+                    }
+                }   
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "circle"
+                    },
+                    "params": [
+                        {
+                            "name": "State_Selection",
+                            "select": {
+                                "type": "point",
+                                "fields": ["Region"]
+                            },
+                            "bind": "legend"
+                        }
+                    ],
+                    "encoding": {
+                        "color": {
+                            "field": "Region",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": [" Australian Capital Territory", " New South Wales", " Northern Territory", " Queensland", " South Australia", " Tasmania", " Victoria", " Western Australia"],
+                                "range": ["#e5c494", "#66c2a5", "#b3b3b3", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f"]
+                            }
+                        },
+                        "size": {
+                            "field": "Population",
+                            "type": "quantitative",
+                            "scale": {
+                                "type": "pow",
+                                "domainMin": 0,
+                                "domainMax": 1000000
+                            }
+                        },
+                        "opacity": {
+                            "condition": {
+                                "param": "State_Selection", 
+                                "value":0.8
+                            },
+                            "value": 0.2
+                        },
+                        "tooltip": [
+                            {"field": "Region"},
+                            {"field": "Year"},
+                            {"field": "Birth_Rate"},
+                            {"field": "Births"},
+                            {"field": "Death_Rate"},
+                            {"field": "Deaths"}
+                        ]
+                    }
+                },
+                {
+    
+                    "mark": {
+                        "type": "text", 
+                        "align": {
+                            "expr": "datum.Region == ' Victoria' || datum.Region == ' South Australia' ? 'right' : datum.Region == ' Western Australia' || datum.Region == ' Queensland' ? 'left' : 'center'"
+                        },
+                        "dx": {
+                            "expr": "datum.Region == ' Victoria' ? -28 : datum.Region == ' South Australia' ? -19 : datum.Region == ' Queensland' || datum.Region == ' Western Australia' ? 24 : 0"
+                        },
+                        "dy": {"expr": "datum.Region == ' New South Wales' ? -35 : datum.Region == ' Northern Territory' || datum.Region == ' Tasmania' || datum.Region == ' Australian Capital Territory' ? -18 : 0"}
+                    },
+                    "encoding": {
+                        "text": {
+                            "field": "Region"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "data": {
+                "values": [
+                    {"y_pos": 5.35}
+                ]
+            },
+            "mark": {
+                "type": "rule",
+                "strokeDash": [4,2],
+                "opacity": {"expr": "Annotation_Selection/3"}
+            },
+            "encoding": {
+                "y": {
+                    "field": "y_pos",
+                    "type": "quantitative"
+                },
+                "color": {
+                    "value": "grey"
+                }
+            }
+        },
+        {
+            "data": {
+                "values": [
+                    {"x_pos": 4.6, "y_pos": 5.1, "content": "Territories have lower death rates"}
+                ]
+            },
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "color": "grey",
+                "opacity": {"expr": "Annotation_Selection"}
+            },
+            "encoding": {
+                "text": {
+                    "field": "content"
+                },
+                "x": {
+                    "field": "x_pos",
+                    "type": "quantitative"
+                },
+                "y": {
+                    "field": "y_pos",
+                    "type": "quantitative"
+                }
+            }
+        }
+        
+    ],
+    "config": {
+        "title": {
+            "anchor":"start",
+            "fontWeight": "lighter",
+            "fontSize": 13,
+            "color": "black"
+        },
+        "axis": {
+            "grid": false,
+            "domain": false,
+            "ticks": false,
+            "labelFontSize": 11,
+            "labelColor": "grey"
+        },
+        "axisX": {
+            "titleAnchor": "end",
+            "titleAlign": "left",
+            "titleFontWeight": "lighter",
+            "titleFontSize": 13,
+            "titleY": 1,
+            "titleX": 620
+        },
+        "axisY": {
+            "title": null
+        },
+        "view": {
+            "stroke": null
+        },
+        "padding": {
+            "bottom": 25
+        }
+    }
+    
+    
+}

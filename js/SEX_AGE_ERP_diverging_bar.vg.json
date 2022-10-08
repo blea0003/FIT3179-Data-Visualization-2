@@ -51,7 +51,7 @@
                     "type": "nominal",
                     "scale": {
                         "domain": ["Females", "Males"],
-                        "range": ["#fea045", "#f23e26"]
+                        "range": ["#9dbeb1", "#e7323f"]
                     }
                 },
                 "tooltip": [
@@ -140,8 +140,8 @@
         {
             "data": {
                 "values": [
-                    {"Sex": "Female Population", "x_text": -0.02, "y_text": -5, "colour": "#fea045"},
-                    {"Sex": "Male Population", "x_text": 0.02, "y_text": -5, "colour": "#f23e26"}
+                    {"Sex": "Female Population", "x_text": -0.02, "y_text": -5, "colour": "#9dbeb1"},
+                    {"Sex": "Male Population", "x_text": 0.02, "y_text": -5, "colour": "#e7323f"}
                 ]
             },
             "mark": {

@@ -65,7 +65,8 @@
             ],
             "mark": {
                 "type": "text",
-                "align": "center"
+                "align": "center",
+                "color": "black"
             },
             "encoding": {
                 "text": {

@@ -221,7 +221,6 @@
             "fontSize": 13,
             "color": "black"
         },
-
         "axis": {
             "grid": false,
             "domain": false,
