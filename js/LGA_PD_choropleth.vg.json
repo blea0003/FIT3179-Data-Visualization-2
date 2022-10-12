@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Map: Average Population per KM^2 by Local Government Area (LGA) [2001-2020]",
+    "title": "Average Population per KM^2 by Local Government Area (LGA) [2001-2020]",
     "params": [
         {
             "name": "Annotation_Selection",
